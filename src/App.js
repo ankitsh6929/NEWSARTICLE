@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Navbar from "./components/Shared/Navbar";
+import Overview from "./components/Dashboard/Overview";
+import Footer from "./components/Shared/Footer";
+import { DarkModeContext } from "./utils/localStorage";
 
-function App() {
+const App = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
+      <div className={darkMode ? "dark-mode" : "light-mode"}>
+        <Navbar />
+        <Overview />
+        <Footer />
+      </div>
+    </DarkModeContext.Provider>
   );
-}
+};
 
 export default App;
